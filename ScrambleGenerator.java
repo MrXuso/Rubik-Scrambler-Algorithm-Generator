@@ -9,14 +9,14 @@ import java.util.Random;
 
 public class ScrambleGenerator {
 
-    /*
+    /**
     * MOVE -> 1 - U, 2 - L, 3 - F, 4 - D, 5 - R, 6 - B
     * ROTATION -> 1 - X, 2 - 2X, 3 - X', 4 - 2X
     */
     int mLastFace = 0, mTwoFacesAgo = 0;
     private String mScramble = "";
 
-    /*
+    /**
     * Constructor: create a scramble algorithm with "algorithmLength" number of moves
     * @param algorithmLength Define the length of the algorithm
     */
@@ -26,7 +26,7 @@ public class ScrambleGenerator {
         }
     }
 
-    /*
+    /**
     * Next face we move in the algorithm, it is different from the last move and from the face moved
     * two times ago if the opposite face was moved in the last move (i.e. R L 2R is incorrect, it should be R' L instead).
     * @return random A number between 1 and 6 (both included) --> 1 - U, 2 - L, 3 - F, 4 - D, 5 - R, 6 - B <--
@@ -50,18 +50,16 @@ public class ScrambleGenerator {
 
         return random;
     }
-    /*
-    * Next rotation of the face (there are no constraints)
-    * @return random A number between 1 and 4 (both included) --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <--
+    /**
+    * Next rotation of the face (there are no constraints) --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <-- 
     */
     private int getNextRotation(){
 
         return (new Random().nextInt(4) + 1);
     }
 
-    /*
+    /**
     * Concatenates the rotation and the movement (X, X', 2X)
-    * @return nextMove A combination of the face and the rotation (X, X', 2X)
     */
     private String getNextMove(){
         String nextMove = "";
@@ -103,7 +101,7 @@ public class ScrambleGenerator {
         return nextMove + " ";
     }
 
-    /*
+    /**
     * @return mScramble The full algorithm for scrambling the cube
      */
     public String getScramble(){
