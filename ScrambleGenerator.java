@@ -31,18 +31,18 @@ public class ScrambleGenerator {
     * two times ago if the opposite face was moved in the last move (i.e. R L 2R is incorrect, it should be R' L instead).
     * @return random A number between 1 and 6 (both included) --> 1 - U, 2 - L, 3 - F, 4 - D, 5 - R, 6 - B <--
     */
-        private int getNextFace(){
-        int random = (new Random().nextInt(6) + 1);
-        if (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace){
-            while (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace) {
-                random = (new Random().nextInt(6) + 1);
-            }
+    private int getNextFace(){
+    int random = (new Random().nextInt(6) + 1);
+    if (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace){
+        while (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace) {
+            random = (new Random().nextInt(6) + 1);
         }
+    }
 
-        mTwoFacesAgo = mLastFace;
-        mLastFace = random;
+    mTwoFacesAgo = mLastFace;
+    mLastFace = random;
 
-        return random;
+    return random;
     }
     /**
     * Next rotation of the face (there are no constraints) --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <-- 
