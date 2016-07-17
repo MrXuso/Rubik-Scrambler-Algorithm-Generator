@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  * Creates a random algorithm to scramble the Rubik's Cube (3x3) with a number of moves
- * defined by the user.
+ * (25 recommended for a good scramble) defined by the user.
  *
  * Created by mrxuso on 13/07/16.
  */
@@ -32,23 +32,28 @@ public class ScrambleGenerator {
     * @return random A number between 1 and 6 (both included) --> 1 - U, 2 - L, 3 - F, 4 - D, 5 - R, 6 - B <--
     */
     private int getNextFace(){
-    int random = (new Random().nextInt(6) + 1);
-    if (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace){
+        int random = (new Random().nextInt(6) + 1);
+        
+        /*We generate a face different from the one two moves ago if we moved
+        * the opposite face in the previous move and different from the last face we moved
+        */
         while (random == mTwoFacesAgo && random%3 == mLastFace%3 || random == mLastFace) {
             random = (new Random().nextInt(6) + 1);
         }
-    }
 
-    mTwoFacesAgo = mLastFace;
-    mLastFace = random;
+        //We save the last face moved and the one moved two times ago
+        mTwoFacesAgo = mLastFace;
+        mLastFace = random;
 
-    return random;
+        //We return the random number of the face
+        return random;
     }
     /**
-    * Next rotation of the face (there are no constraints) --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <-- 
+    * Next rotation of the face (there are no constraints) --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <--
     */
     private int getNextRotation(){
 
+        //We return a random number between 1 and 4 indicating the rotation of the face
         return (new Random().nextInt(4) + 1);
     }
 
@@ -57,6 +62,8 @@ public class ScrambleGenerator {
     */
     private String getNextMove(){
         String nextMove = "";
+
+        // --> 1 - U, 2 - L, 3 - F, 4 - D, 5 - R, 6 - B <--
         switch (getNextFace()){
             case 1:
                 nextMove = "U";
@@ -78,9 +85,8 @@ public class ScrambleGenerator {
                 break;
         }
 
+        // --> 1 - X, 2 - 2X, 3 - X', 4 - 2X <--
         switch (getNextRotation()){
-            case 1:
-                break;
             case 2:
                 nextMove = "2" + nextMove;
                 break;
@@ -92,12 +98,13 @@ public class ScrambleGenerator {
                 break;
         }
 
+        //We add a space between the moves
         return nextMove + " ";
     }
 
     /**
     * @return mScramble The full algorithm for scrambling the cube
-     */
+    */
     public String getScramble(){
         return mScramble;
     }
